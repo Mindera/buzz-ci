@@ -6,6 +6,9 @@
   "engines": {
     "node": ">= 8.1.0"
   },
+  "scripts": {
+    "start": "npx ts-node server.ts"
+  },
   "dependencies": {
     "buzz-buzzers": "^1.0.1",
     "config": "^3.0.1",
