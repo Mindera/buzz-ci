@@ -1,10 +1,18 @@
-// this line would be require('buzz-buzzers'); for you
-const { exec, spawnSync, spawn } = require("child_process");
+const { exec } = require("child_process");
 const buzzBuzzers = require("buzz-buzzers");
 
 let BROWSER_OPENED = false;
+const NEW_RELIC_TITAN =
+  "https://rpm.newrelic.com/accounts/417057/applications/64178797/filterable_errors";
+const NEW_RELIC_COMISSION_SERVICE =
+  "https://insights.newrelic.com/accounts/417057/dashboards/634938";
 const TRAINLINE_HOME = "https://trainline.com";
-const MIGUEL_IP = "10.10.16.37:3000";
+const REACTION_GAME = "localhost:3000";
+const FLAPPY_BIRD = "https://flappybird.io/";
+const FIRE_AMBIENT = "https://www.youtube.com/watch?v=NpQSEvPMLGA";
+const BROWSER_SIZE = "--window-size=1920,1080";
+const BROWSER_OPTIONS =
+  "--kiosk --no-sandbox --noerrdialogs --no-message-box --no-first-run --fast --fast-start --disable-infobars";
 
 const BUTTONS = {
   BUZZER: 0,
@@ -14,25 +22,7 @@ const BUTTONS = {
   YELLOW: 4
 };
 
-let buzzers;
-
-try {
-  buzzers = buzzBuzzers();
-} catch (e) {
-  buzzers = {
-    onError: () => {},
-    onPress: () => {},
-    onRelease: () => {}
-  };
-  console.log("Error", e);
-}
-
-// buzzers.prototype.onLongPress = function (params) {
-//   buzzers.onPress(function(){
-
-//   })
-// }
-
+let buzzers = buzzBuzzers();
 function blinkBuzzerLeds() {
   setInterval(function() {
     buzzers.setLeds(true, true, true, true);
@@ -44,6 +34,17 @@ function blinkBuzzerLeds() {
 
 blinkBuzzerLeds();
 
+const tabSwitcher = setInterval(() => {
+  console.log("Tab switched...");
+  if (BROWSER_OPENED) {
+    exec("xdotool key ctrl+Tab");
+  }
+}, 10000);
+
+if (tabSwitcher) {
+  clearTimeout(tabSwitcher);
+}
+
 buzzers.onError(function(err) {
   console.log("Error: ", err);
 });
@@ -53,21 +54,24 @@ buzzers.onPress(function(ev) {
   switch (ev.button) {
     case BUTTONS.BUZZER:
       console.log("BUZZER clicked");
-      console.log("browser closed", BROWSER_OPENED);
+      console.log("browser is open", BROWSER_OPENED);
       if (!BROWSER_OPENED) {
+        BROWSER_OPENED = true;
         exec(
-          `DISPLAY=:0 chromium-browser --no-sandbox --noerrdialogs --no-message-box --kiosk ${MIGUEL_IP} ${TRAINLINE_HOME}`,
+          `DISPLAY=:0 chromium-browser ${BROWSER_SIZE} ${BROWSER_OPTIONS} ${FIRE_AMBIENT} ${NEW_RELIC_TITAN} ${NEW_RELIC_COMISSION_SERVICE} ${TRAINLINE_HOME} ${REACTION_GAME}`,
           function(arg) {
             console.log("finished opening chrome", arg);
           }
         );
       }
-      exec(`curl ${MIGUEL_IP}/winner/${ev.controller}`);
+      exec(`curl ${REACTION_GAME}/winner/${ev.controller}`);
+      exec("xdotool key space");
       break;
 
     case BUTTONS.BLUE:
       console.log("BLUE clicked");
       exec("xdotool key ctrl+Tab");
+      clearTimeout(tabSwitcher);
       break;
 
     case BUTTONS.ORANGE:
@@ -99,26 +103,9 @@ buzzers.onRelease(function(ev) {
   );
 });
 
-// process.stdin.on("keypress", (str, key) => {
-//   console.log("str", str, "key", key);
-//   console.log(`stdout: ${ls.stdout.toString()}`);
-// });
-
-const BROWESER =
-  "DISPLAY =: 0 chromium - browser--noerrdialogs--disable - features=TranslateUI--no - message - box http://trainline.com http://hydra.teamcity.ci.ttldev/project.html?projectId=MyAccountWeb&tab=projectOverview";
-
-const openLs = () => {
-  const ls = spawn("ls", ["-lh", "/usr"]);
-
-  ls.stdout.on("data", data => {
-    console.log(`stdout: ${data}`);
-  });
-
-  ls.stderr.on("data", data => {
-    console.log(`stderr: ${data}`);
-  });
-
-  ls.on("close", code => {
-    console.log(`child process exited with code ${code}`);
-  });
-};
+buzzers.onChange(function(state) {
+  if (state.filter(v => v).length === 5) {
+    console.log("detected overload!");
+    exec("sudo reboot");
+  }
+});
