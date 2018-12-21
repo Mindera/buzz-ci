@@ -41,7 +41,7 @@ export default (buzzers: any) => class Utils {
         const endTime: any = await (new Promise<Date>((resolve) => {
             this.event[ev.controller][ev.button].setResolve(resolve);
         })).catch((err) => {console.log(err)})
-        return (endTime - startTime) > 3000 ? 'LONGPRESS' : 'NORMAL';
+        return (endTime - startTime) > 100 ? 'LONGPRESS' : 'NORMAL';
     }
 
     clickEvent(ev){
