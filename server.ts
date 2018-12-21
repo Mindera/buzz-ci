@@ -38,3 +38,10 @@ buzzers.onRelease(ev => {
     utils.releaseEvent(ev);
 
 }); 
+
+buzzers.onChange((state) => {
+    if (state.filter(v => v).length === 5) {
+        console.log("detected overload!");
+        exec("sudo reboot");
+    }
+})

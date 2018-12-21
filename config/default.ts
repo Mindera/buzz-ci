@@ -6,7 +6,6 @@ const NEW_RELIC_COMISSION_SERVICE =
   "https://insights.newrelic.com/accounts/417057/dashboards/634938";
 const TRAINLINE_HOME = "https://trainline.com";
 const REACTION_GAME = "localhost:3000";
-const FLAPPY_BIRD = "https://flappybird.io/";
 const FIRE_AMBIENT = "https://www.youtube.com/watch?v=NpQSEvPMLGA";
 const BROWSER_SIZE = "--window-size=1920,1080";
 const BROWSER_OPTIONS =

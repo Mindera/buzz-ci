@@ -1,7 +1,7 @@
 {
   "name": "buzz",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.ts",
   "license": "MIT",
   "engines": {
     "node": ">= 8.1.0"
