@@ -2,6 +2,13 @@
 # buzz-ci (WIP!)
 Control your CI with buzz controllers
 
+TODOS
+- [] Configure CI for auto deploy
+- [] Define commands
+- [] Way to load remote configurations
+- [] Update README with usage
+
+
 **Installation**
 
 
