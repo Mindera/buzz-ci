@@ -1,22 +1,24 @@
+/// <reference path="./server.d.ts" />
+
 import config from 'config';
 import { exec } from 'child_process';
-import buzzBuzzers from 'buzz-buzzers';
+import * as buzzBuzzers from 'buzz-buzzers';
 import utilsClass from './utils';
 
 /**
  * INITAL SETUP
  */
 const buzzers = buzzBuzzers();
-const utils = utilsClass(buzzers);
+const classUtils = utilsClass(buzzers);
+const utils = new classUtils();
 
 utils.blinkBuzzerLeds();
 
 
-buzzers.onPress(ev => {
+buzzers.onPress(async ev => {
     buzzers.setLeds(true, true, true, true);
 
-    utils.events = utils.newRef(ev);
-    const clickType = await utils.getClickType();
+    const clickType = await utils.getClickType(ev);
 
     const configuration = config.get(ev.button);
     exec(configuration.cmd[clickType]);
@@ -32,4 +34,4 @@ buzzers.onRelease(ev => {
 
     utils.releaseEvent(ev);
 
-});
+}); 

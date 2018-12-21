@@ -7,6 +7,13 @@
     "node": ">= 8.1.0"
   },
   "dependencies": {
-    "buzz-buzzers": "^1.0.1"
+    "buzz-buzzers": "^1.0.1",
+    "child_process": "^1.0.2",
+    "config": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/config": "0.0.34",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }
