@@ -1,7 +1,7 @@
 
 /// <reference path="./server.d.ts" />
 
-import config from 'config';
+import * as config from 'config';
 import { exec } from 'child_process';
 import * as buzzBuzzers from 'buzz-buzzers';
 import utilsClass from './utils';
@@ -21,8 +21,9 @@ buzzers.onPress(async ev => {
 
     utils.clickEvent(ev);
     const clickType = await utils.getClickType(ev);
+    console.log('asdpifuhasiudfasd > \n\n',clickType);
 
-    const configuration = config.get(ev.button);
+    const configuration = config.get(`${ev.button}`);
     exec(configuration.cmd[clickType]);
     console.log(
 

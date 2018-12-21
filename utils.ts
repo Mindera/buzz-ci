@@ -38,9 +38,9 @@ export default (buzzers: any) => class Utils {
 
     async getClickType(ev){
         const startTime: any = new Date();
-        const endTime: any = await new Promise<Date>((resolve) => {
+        const endTime: any = await (new Promise<Date>((resolve) => {
             this.event[ev.controller][ev.button].setResolve(resolve);
-        })
+        })).catch((err) => {console.log(err)})
         return (endTime - startTime) > 3000 ? 'LONGPRESS' : 'NORMAL';
     }
 

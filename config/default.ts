@@ -17,7 +17,7 @@ export default {
     [BUTTONS.BUZZER]: {
         cmd: {
             NORMAL: `DISPLAY=:0 chromium-browser ${BROWSER_SIZE} ${BROWSER_OPTIONS} ${FIRE_AMBIENT} ${NEW_RELIC_TITAN} ${NEW_RELIC_COMISSION_SERVICE} ${TRAINLINE_HOME} ${REACTION_GAME}`,
-            LONGPRESS: ''
+            LONGPRESS: 'echo LONGPRESS'
         }
     },
     [BUTTONS.BLUE]:{
