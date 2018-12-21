@@ -1,4 +1,4 @@
-import { BUTTONS } from 'constants';
+import { BUTTONS } from '../constants';
 
 const NEW_RELIC_TITAN =
   "https://rpm.newrelic.com/accounts/417057/applications/64178797/filterable_errors";
@@ -20,28 +20,28 @@ export default {
             LONGPRESS: ''
         }
     },
-    [BUTTON.BLUE]:{
+    [BUTTONS.BLUE]:{
         cmd: { 
             NORMAL: 'xdotool key ctrl+Tab',
             LONGPRESS: ''
         }
     },
-    [BUTTON.ORANGE]:{
+    [BUTTONS.ORANGE]:{
         cmd: { 
             NORMAL: 'xdotool key ctrl+r',
             LONGPRESS: ''
         }
     },
-    [BUTTON.GREEN]:{
+    [BUTTONS.GREEN]:{
         cmd: { 
             NORMAL: 'xdotool key ctrl+f',
             LONGPRESS: ''
         }
     },
-    [BUTTON.YELLOW]:{
+    [BUTTONS.YELLOW]:{
         cmd: { 
             NORMAL: 'xdotool key ctrl+w',
             LONGPRESS: ''
         }
     }
-}
+} 
