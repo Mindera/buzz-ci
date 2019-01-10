@@ -34,7 +34,7 @@ export default {
     },
     [BUTTONS.GREEN]:{
         cmd: { 
-            NORMAL: 'xdotool key ctrl+f',
+            NORMAL: 'xdotool key f',
             LONGPRESS: ''
         }
     },
