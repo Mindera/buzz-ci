@@ -11,7 +11,7 @@ const TRAIN_LIVE = "https://www.youtube.com/watch?v=DBd560d1DIM";
 const BROWSER_SIZE = "--window-size=1920,1080";
 const BROWSER_OPTIONS =
   "--kiosk --no-sandbox --noerrdialogs --no-message-box --no-first-run --fast --fast-start --disable-infobars";
-
+export const LONGPRESS_TIME = 300;
 
 export default {
     [BUTTONS.BUZZER]: {
