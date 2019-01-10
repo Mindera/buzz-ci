@@ -1,3 +1,4 @@
+import { LONGPRESS_TIME } from './config/default';
 
 class Timer {
 
@@ -41,7 +42,7 @@ export default (buzzers: any) => class Utils {
         const endTime: any = await (new Promise<Date>((resolve) => {
             this.event[ev.controller][ev.button].setResolve(resolve);
         })).catch((err) => {console.log(err)})
-        return (endTime - startTime) > 100 ? 'LONGPRESS' : 'NORMAL';
+        return (endTime - startTime) > LONGPRESS_TIME ? 'LONGPRESS' : 'NORMAL';
     }
 
     clickEvent(ev){
